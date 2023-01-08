@@ -1,0 +1,140 @@
+[gd_scene load_steps=5 format=3 uid="uid://rw7gdui8lu3n"]
+
+[ext_resource type="Script" path="res://addons/EasyMenus/Scripts/pause_menu_controller.gd" id="1_5etq0"]
+[ext_resource type="PackedScene" uid="uid://qlskttl1wjr7" path="res://addons/EasyMenus/Scenes/options_menu.tscn" id="2_ejh0f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rouim"]
+bg_color = Color(0.439216, 0.592157, 0.6, 0.545098)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_srhh1"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_5etq0")
+
+[node name="PauseMenu" type="PanelContainer" parent="."]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -10.0
+offset_right = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rouim")
+
+[node name="Content" type="VBoxContainer" parent="PauseMenu"]
+unique_name_in_owner = true
+offset_right = 350.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="HSeparator2" type="HSeparator" parent="PauseMenu/Content"]
+custom_minimum_size = Vector2(0, 20)
+offset_right = 350.0
+offset_bottom = 20.0
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_srhh1")
+
+[node name="PauseMenuLabel" type="Label" parent="PauseMenu/Content"]
+offset_top = 25.0
+offset_right = 350.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 12
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/Content"]
+offset_top = 50.0
+offset_right = 350.0
+offset_bottom = 50.0
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="ResumeGameButton" type="Button" parent="PauseMenu/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(224, 0)
+offset_left = 63.0
+offset_top = 55.0
+offset_right = 287.0
+offset_bottom = 75.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 8
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="PauseMenu/Content"]
+custom_minimum_size = Vector2(224, 0)
+offset_left = 63.0
+offset_top = 80.0
+offset_right = 287.0
+offset_bottom = 100.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 8
+text = "Options"
+
+[node name="BackToMenuButton" type="Button" parent="PauseMenu/Content"]
+custom_minimum_size = Vector2(224, 0)
+offset_left = 63.0
+offset_top = 105.0
+offset_right = 287.0
+offset_bottom = 125.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 8
+text = "Back to Main Menu"
+
+[node name="QuitButton" type="Button" parent="PauseMenu/Content"]
+custom_minimum_size = Vector2(224, 0)
+offset_left = 63.0
+offset_top = 130.0
+offset_right = 287.0
+offset_bottom = 150.0
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 8
+text = "Quit"
+
+[node name="OptionsMenu" parent="PauseMenu" instance=ExtResource("2_ejh0f")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 350.0
+offset_bottom = 154.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="MarginContainer" parent="PauseMenu/OptionsMenu" index="0"]
+offset_left = -27.0
+offset_top = -8.0
+offset_right = 27.0
+offset_bottom = 18.0
+
+[node name="ScrollContainer" parent="PauseMenu/OptionsMenu/MarginContainer" index="0"]
+offset_right = 379.0
+offset_bottom = 155.0
+
+[node name="SFXVolumeSlider" parent="PauseMenu/OptionsMenu/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer" index="0"]
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="MusicVolumeSlider" parent="PauseMenu/OptionsMenu/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer" index="1"]
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="SubViewport" type="SubViewport" parent="PauseMenu"]
+
+[connection signal="pressed" from="PauseMenu/Content/ResumeGameButton" to="." method="_on_resume_game_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Content/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Content/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
+[connection signal="pressed" from="PauseMenu/Content/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="close" from="PauseMenu/OptionsMenu" to="." method="_on_options_menu_close"]
+
+[editable path="PauseMenu/OptionsMenu"]
+[editable path="PauseMenu/OptionsMenu/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer/SFXVolumeSlider"]
+[editable path="PauseMenu/OptionsMenu/MarginContainer/ScrollContainer/VBoxContainer/MarginContainer/VBoxContainer/MusicVolumeSlider"]

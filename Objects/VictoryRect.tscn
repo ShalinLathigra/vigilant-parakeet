@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://chycjurmni3pc"]
+
+[ext_resource type="Shader" path="res://Autoloads/ScoreUIFadeIn.gdshader" id="1_5i41w"]
+[ext_resource type="Script" path="res://Objects/VictoryRect.gd" id="2_1n60p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_61utd"]
+resource_local_to_scene = true
+shader = ExtResource("1_5i41w")
+shader_parameter/t = -0.01
+
+[sub_resource type="Gradient" id="Gradient_v384a"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mdfix"]
+gradient = SubResource("Gradient_v384a")
+fill = 1
+fill_from = Vector2(0, 0.25)
+fill_to = Vector2(1, 1)
+
+[node name="P1VictoryRect" type="TextureRect"]
+material = SubResource("ShaderMaterial_61utd")
+offset_right = 256.0
+offset_bottom = 145.0
+texture = SubResource("GradientTexture2D_mdfix")
+script = ExtResource("2_1n60p")

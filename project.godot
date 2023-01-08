@@ -1,0 +1,149 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+_global_script_classes=[{
+"base": "Area2D",
+"class": &"BounceDetector",
+"language": &"GDScript",
+"path": "res://Objects/BounceDetector.gd"
+}, {
+"base": "CharacterBody2D",
+"class": &"Minotaur",
+"language": &"GDScript",
+"path": "res://Objects/Minotaur.gd"
+}, {
+"base": "Node",
+"class": &"OptionsConstants",
+"language": &"GDScript",
+"path": "res://addons/EasyMenus/Scripts/options_constants.gd"
+}, {
+"base": "CharacterBody2D",
+"class": &"Paddle",
+"language": &"GDScript",
+"path": "res://Objects/Paddle.gd"
+}, {
+"base": "StaticBody2D",
+"class": &"Shield",
+"language": &"GDScript",
+"path": "res://Objects/Shield.gd"
+}, {
+"base": "TextureRect",
+"class": &"VictoryRect",
+"language": &"GDScript",
+"path": "res://Objects/VictoryRect.gd"
+}]
+_global_script_class_icons={
+"BounceDetector": "",
+"Minotaur": "",
+"OptionsConstants": "",
+"Paddle": "",
+"Shield": "",
+"VictoryRect": ""
+}
+
+[application]
+
+config/name="vigilant-parakeet"
+run/main_scene="res://addons/EasyMenus/Scenes/main_menu.tscn"
+config/features=PackedStringArray("4.0", "Mobile")
+config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://audio_bus_layout.tres"
+
+[autoload]
+
+EventBus="*res://Autoloads/EventBus.gd"
+ScoreUI="*res://Autoloads/ScoreUI.tscn"
+State="*res://Autoloads/State.gd"
+MenuTemplateManager="*res://addons/EasyMenus/Nodes/menu_template_manager.tscn"
+SceneChangeHandler="*res://Autoloads/SceneChangeHandler.tscn"
+
+[display]
+
+window/size/viewport_width=256
+window/size/viewport_height=144
+window/size/window_width_override=1024
+window/size/window_height_override=576
+window/stretch/mode="viewport"
+
+[input]
+
+p1_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":87,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+p1_down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":83,"physical_keycode":0,"unicode":115,"echo":false,"script":null)
+]
+}
+p1_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":65,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+p1_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":68,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+p1_bash={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+p2_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":73,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+p2_down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":75,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+p2_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":74,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+p2_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":76,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+p2_bash={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194309,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":61,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":80,"physical_keycode":0,"unicode":0,"echo":false,"script":null)
+]
+}
+
+[physics]
+
+common/physics_ticks_per_second=120
+2d/physics_engine="GodotPhysics2D"
+2d/sleep_threshold_linear=1.0
+2d/time_before_sleep=3.0
+
+[rendering]
+
+renderer/rendering_method="mobile"
+textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1

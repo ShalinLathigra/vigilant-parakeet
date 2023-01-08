@@ -1,0 +1,9 @@
+extends Node
+
+signal minotaur_bounced
+signal start_game_pressed
+signal pause_game_pressed
+signal back_to_main_pressed
+signal minotaur_reached_goal
+signal rally_reset
+signal round_end

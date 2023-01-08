@@ -1,0 +1,315 @@
+[gd_scene load_steps=25 format=3 uid="uid://0ehk8b80ubkq"]
+
+[ext_resource type="Texture2D" uid="uid://c7rdyo67fug17" path="res://_Assets/minotaur.svg" id="1_ca7yt"]
+[ext_resource type="Script" path="res://Objects/Minotaur.gd" id="1_eg8gm"]
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_vup4g"]
+[ext_resource type="PackedScene" uid="uid://1wp36uv2w0is" path="res://Objects/Paddle.tscn" id="3_ptugc"]
+[ext_resource type="Shader" path="res://SimpleTransparentBackground.gdshader" id="4_e5wmg"]
+[ext_resource type="Script" path="res://Scenes/GoalPost.gd" id="4_idbwb"]
+[ext_resource type="PackedScene" uid="uid://rw7gdui8lu3n" path="res://addons/EasyMenus/Scenes/pause_menu.tscn" id="4_l3n2q"]
+[ext_resource type="Script" path="res://Scenes/PauseListener.gd" id="4_os324"]
+[ext_resource type="Texture2D" uid="uid://bf1khqkebvw3v" path="res://_Assets/background.png" id="8_mj7cb"]
+[ext_resource type="Texture2D" uid="uid://bpa15dpwktfxx" path="res://_Assets/highlight.png" id="10_jw332"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eb2i3"]
+radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1kf2"]
+shader = ExtResource("4_e5wmg")
+
+[sub_resource type="Curve" id="Curve_nkaro"]
+max_value = 2.0
+_data = [Vector2(0, 0.518182), 0.0, 3.57478, 0, 0, Vector2(0.4, 1.03636), 1.47594, 1.47594, 0, 0, Vector2(0.813043, 2), 0.122994, 0.122994, 0, 0, Vector2(1, 0.0272727), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_3tiu4"]
+offsets = PackedFloat32Array(0, 0.917874, 1)
+colors = PackedColorArray(0.710938, 0.623124, 0.510678, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yvom2"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eude8"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wbgi4"]
+normal = Vector2(1, 0)
+
+[sub_resource type="Gradient" id="Gradient_pyn4v"]
+colors = PackedColorArray(0.44, 0.44, 0.44, 1, 0.42, 0.42, 0.42, 0.501961)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w42nf"]
+gradient = SubResource("Gradient_pyn4v")
+use_hdr = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cn7yy"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(8, 116, 1)
+particle_flag_disable_z = true
+gravity = Vector3(-98, 0, 0)
+initial_velocity_min = 128.0
+initial_velocity_max = 384.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 4.0
+color = Color(0.760784, 0.760784, 0.760784, 1)
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_df5ae"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(8, 116, 1)
+particle_flag_disable_z = true
+gravity = Vector3(-196, 0, 0)
+initial_velocity_min = 128.0
+initial_velocity_max = 256.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 4.0
+scale_max = 8.0
+color = Color(0.901961, 0.901961, 0.901961, 1)
+hue_variation_min = 0.91
+hue_variation_max = 1.0
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_acglt"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nsxg6"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(8, 116, 1)
+particle_flag_disable_z = true
+gravity = Vector3(98, 0, 0)
+initial_velocity_min = -384.0
+initial_velocity_max = -128.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 4.0
+color = Color(0.760784, 0.760784, 0.760784, 1)
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oeucx"]
+lifetime_randomness = 0.5
+emission_shape = 3
+emission_box_extents = Vector3(8, 116, 1)
+particle_flag_disable_z = true
+gravity = Vector3(196, 0, 0)
+initial_velocity_min = -256.0
+initial_velocity_max = 128.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 4.0
+scale_max = 8.0
+color = Color(0.901961, 0.901961, 0.901961, 1)
+hue_variation_min = 0.91
+hue_variation_max = 1.0
+sub_emitter_mode = 1
+sub_emitter_frequency = 4.0
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("p1_highlight", "p2_highlight", "p1_start", "p2_start")]
+script = ExtResource("1_vup4g")
+p1_highlight = NodePath("Highlight")
+p2_highlight = NodePath("Highlight2")
+p1_start = NodePath("p1Start")
+p2_start = NodePath("p2Start")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(128, 72)
+texture = ExtResource("8_mj7cb")
+
+[node name="Highlight" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.686275)
+position = Vector2(56, 84)
+texture = ExtResource("10_jw332")
+
+[node name="Highlight2" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.686275)
+position = Vector2(194, 84)
+texture = ExtResource("10_jw332")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(128, 72)
+current = true
+
+[node name="Minotaur" type="CharacterBody2D" parent="."]
+position = Vector2(127, 27)
+collision_mask = 2
+slide_on_ceiling = false
+safe_margin = 0.001
+script = ExtResource("1_eg8gm")
+direction = Vector2(-1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Minotaur"]
+shape = SubResource("CircleShape2D_eb2i3")
+debug_color = Color(0, 0.682353, 0.701961, 0.419608)
+
+[node name="Minotaur" type="Sprite2D" parent="Minotaur"]
+self_modulate = Color(1, 1, 1, 0)
+material = SubResource("ShaderMaterial_v1kf2")
+texture = ExtResource("1_ca7yt")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Minotaur/Minotaur"]
+position = Vector2(0, 8)
+emission_shape = 3
+emission_rect_extents = Vector2(3, 1)
+gravity = Vector2(0, -16)
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 1.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_nkaro")
+color = Color(0.709804, 0.623529, 0.509804, 1)
+color_ramp = SubResource("Gradient_3tiu4")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="Paddle" parent="." node_paths=PackedStringArray("marker", "topLeft", "botRight") instance=ExtResource("3_ptugc")]
+modulate = Color(0.156863, 0.8, 0.180392, 1)
+position = Vector2(-40, 79)
+start_size = 5
+ticks_to_next_bash = 500
+max_ticks_to_early_bash_exit = 350
+marker = NodePath("../p1Marker")
+topLeft = NodePath("../p1TopLeft")
+botRight = NodePath("../p1BotRight")
+
+[node name="p1Marker" type="Marker2D" parent="."]
+position = Vector2(56, 79)
+
+[node name="p1TopLeft" type="Marker2D" parent="."]
+position = Vector2(22, 33)
+
+[node name="p2TopLeft" type="Marker2D" parent="."]
+position = Vector2(160, 33)
+
+[node name="p1BotRight" type="Marker2D" parent="."]
+position = Vector2(90, 135)
+
+[node name="p2BotRight" type="Marker2D" parent="."]
+position = Vector2(228, 135)
+
+[node name="Paddle2" parent="." node_paths=PackedStringArray("marker", "topLeft", "botRight") instance=ExtResource("3_ptugc")]
+modulate = Color(0.984314, 0.207843, 1, 1)
+position = Vector2(294, 79)
+start_size = 5
+ticks_to_next_bash = 500
+max_ticks_to_early_bash_exit = 350
+is_player_one = false
+marker = NodePath("../p2Marker")
+topLeft = NodePath("../p2TopLeft")
+botRight = NodePath("../p2BotRight")
+
+[node name="p2Marker" type="Marker2D" parent="."]
+position = Vector2(194, 79)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(128, 144)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape2D_yvom2")
+
+[node name="Roof" type="StaticBody2D" parent="."]
+position = Vector2(128, 17)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof"]
+shape = SubResource("WorldBoundaryShape2D_eude8")
+
+[node name="LeftGoal" type="Area2D" parent="."]
+modulate = Color(1, 0, 0.976471, 1)
+position = Vector2(-25, 65)
+collision_layer = 0
+script = ExtResource("4_idbwb")
+is_player_one_side = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal"]
+shape = SubResource("WorldBoundaryShape2D_wbgi4")
+
+[node name="TextureRect" type="TextureRect" parent="LeftGoal"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 25.0
+offset_top = -65.0
+offset_right = 281.0
+offset_bottom = 79.0
+texture = SubResource("GradientTexture2D_w42nf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="LeftGoal"]
+position = Vector2(14, 1)
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_cn7yy")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="LeftGoal"]
+position = Vector2(14, 1)
+emitting = false
+amount = 128
+sub_emitter = NodePath("../GPUParticles2D")
+process_material = SubResource("ParticleProcessMaterial_df5ae")
+
+[node name="LeftGoal2" type="Area2D" parent="."]
+modulate = Color(0, 1, 0.427451, 1)
+position = Vector2(290, 70)
+collision_layer = 0
+script = ExtResource("4_idbwb")
+is_player_one_side = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftGoal2"]
+position = Vector2(-13, 1)
+shape = SubResource("WorldBoundaryShape2D_acglt")
+
+[node name="TextureRect" type="TextureRect" parent="LeftGoal2"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -290.0
+offset_top = -70.0
+offset_right = -34.0
+offset_bottom = 74.0
+texture = SubResource("GradientTexture2D_w42nf")
+flip_h = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="LeftGoal2"]
+position = Vector2(-24, 1)
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_nsxg6")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="LeftGoal2"]
+position = Vector2(-24, 1)
+emitting = false
+amount = 128
+sub_emitter = NodePath("../GPUParticles2D")
+process_material = SubResource("ParticleProcessMaterial_oeucx")
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_l3n2q")]
+visible = false
+
+[node name="PauseListener" type="Node" parent="." node_paths=PackedStringArray("pause_menu")]
+script = ExtResource("4_os324")
+pause_menu = NodePath("../PauseMenu")
+
+[node name="p1Start" type="Label" parent="."]
+offset_left = 29.0
+offset_top = 115.0
+offset_right = 134.0
+offset_bottom = 141.0
+theme_override_font_sizes/font_size = 8
+text = "Press \"Space\""
+
+[node name="p2Start" type="Label" parent="."]
+offset_left = 169.0
+offset_top = 115.0
+offset_right = 274.0
+offset_bottom = 141.0
+theme_override_font_sizes/font_size = 8
+text = "Press \"Enter\""
+
+[connection signal="body_entered" from="LeftGoal" to="LeftGoal" method="_on_body_entered"]
+[connection signal="body_entered" from="LeftGoal2" to="LeftGoal2" method="_on_body_entered"]

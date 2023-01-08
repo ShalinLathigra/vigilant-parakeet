@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://dq6tvhqcy2aps"]
+
+[ext_resource type="Script" path="res://addons/EasyMenus/Scripts/main_menu_controller.gd" id="1_lbw7r"]
+[ext_resource type="Texture2D" uid="uid://bf1khqkebvw3v" path="res://_Assets/background.png" id="2_5k7br"]
+[ext_resource type="PackedScene" uid="uid://qlskttl1wjr7" path="res://addons/EasyMenus/Scenes/options_menu.tscn" id="2_pwqpr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j71rt"]
+bg_color = Color(0.439216, 0.592157, 0.6, 0.545098)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbw7r")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 256.0
+offset_bottom = 144.0
+texture = ExtResource("2_5k7br")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 256.0
+offset_bottom = 147.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_j71rt")
+
+[node name="Content" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = 15.0
+offset_right = 47.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 7
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="Content"]
+offset_right = 350.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 12
+text = "Hoplite Pong"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Content"]
+custom_minimum_size = Vector2(0, 3)
+offset_top = 27.0
+offset_right = 350.0
+offset_bottom = 31.0
+
+[node name="StartGameButton" type="Button" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(224, 0)
+offset_left = 63.0
+offset_top = 38.0
+offset_right = 287.0
+offset_bottom = 60.0
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../QuitButton")
+theme_override_font_sizes/font_size = 10
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(224, 0)
+offset_left = 63.0
+offset_top = 67.0
+offset_right = 287.0
+offset_bottom = 89.0
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../StartGameButton")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../StartGameButton")
+theme_override_font_sizes/font_size = 10
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="Content"]
+custom_minimum_size = Vector2(224, 0)
+offset_left = 63.0
+offset_top = 96.0
+offset_right = 287.0
+offset_bottom = 118.0
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../StartGameButton")
+focus_next = NodePath("../StartGameButton")
+focus_previous = NodePath("../OptionsButton")
+theme_override_font_sizes/font_size = 10
+text = "Quit"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("2_pwqpr")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="pressed" from="Content/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="Content/OptionsButton" to="." method="open_options"]
+[connection signal="pressed" from="Content/QuitButton" to="." method="quit"]
+[connection signal="close" from="OptionsMenu" to="." method="close_options"]

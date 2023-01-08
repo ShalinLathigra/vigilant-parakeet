@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=3 uid="uid://1wp36uv2w0is"]
+
+[ext_resource type="Script" path="res://Objects/Paddle.gd" id="1_5c4is"]
+[ext_resource type="PackedScene" uid="uid://csp1hmaf73qbr" path="res://Objects/Bouncer2D.tscn" id="2_4uiit"]
+[ext_resource type="Texture2D" uid="uid://dx7fa2tswmqho" path="res://_Assets/spartan-helmet.svg" id="3_7613x"]
+[ext_resource type="Shader" path="res://SimpleTransparentBackground.gdshader" id="4_01dmq"]
+[ext_resource type="Script" path="res://Objects/Shield.gd" id="4_6uwug"]
+[ext_resource type="Texture2D" uid="uid://fpjk1ojytgv5" path="res://_Assets/upgrade.svg" id="4_wwb5v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_now8q"]
+size = Vector2(10, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3fgh"]
+shader = ExtResource("4_01dmq")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hiybl"]
+radius = 3.0
+height = 10.0
+
+[sub_resource type="Curve" id="Curve_srduq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.36364, 0.0, 0, 0]
+point_count = 2
+
+[node name="Paddle" type="CharacterBody2D"]
+disable_mode = 1
+collision_layer = 2
+collision_mask = 5
+slide_on_ceiling = false
+script = ExtResource("1_5c4is")
+ticks_to_next_bash = 1000
+max_ticks_to_early_bash_exit = 750
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_now8q")
+debug_color = Color(0, 0.105882, 0.701961, 0.419608)
+
+[node name="Shield" type="StaticBody2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(-5, 0)
+collision_layer = 2
+script = ExtResource("4_6uwug")
+target = NodePath("ShieldBashOffset")
+
+[node name="ShieldDetector" parent="Shield" node_paths=PackedStringArray("sprite") instance=ExtResource("2_4uiit")]
+position = Vector2(2, 0)
+sprite = NodePath("Upgrade")
+sprite_rotated = true
+
+[node name="Upgrade" type="Sprite2D" parent="Shield/ShieldDetector"]
+material = SubResource("ShaderMaterial_r3fgh")
+rotation = 1.5708
+texture = ExtResource("4_wwb5v")
+region_enabled = true
+region_rect = Rect2(0, 0, 12, 12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield"]
+shape = SubResource("CapsuleShape2D_hiybl")
+debug_color = Color(0.701961, 0.129412, 0, 0.419608)
+
+[node name="ShieldBashOffset" type="Marker2D" parent="Shield"]
+position = Vector2(12, 0)
+
+[node name="SpartanDetector" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_4uiit")]
+position = Vector2(1, 0)
+sprite = NodePath("Spartan-helmet")
+
+[node name="Spartan-helmet" type="Sprite2D" parent="SpartanDetector"]
+material = SubResource("ShaderMaterial_r3fgh")
+texture = ExtResource("3_7613x")
+region_enabled = true
+region_rect = Rect2(0, 0, 12, 12)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.75
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2(0, 95)
+initial_velocity_min = 64.0
+initial_velocity_max = 96.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_srduq")
+
+[connection signal="body_entered" from="SpartanDetector" to="." method="_on_spartan_detector_body_entered"]
